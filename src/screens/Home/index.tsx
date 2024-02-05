@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
   TextInput,
   TouchableOpacity,
-  ScrollView,
   FlatList,
   Alert,
 } from "react-native";
@@ -12,25 +11,20 @@ import { styles } from "./styles";
 import { Participant } from "./components/Participant";
 
 export function Home() {
-  const participants = [
-    "Samuel",
-    "Juliana",
-    "Zoe",
-    "Joana",
-    "Guilherme",
-    "Thiago",
-    "Matheus",
-    "Thais",
-    "Ursula",
-  ];
+  const [participants, setParticipants] = useState<string[]>([]);
+  const [participantName, setParticipantName] = useState<string>("");
 
   const handleParticipantAdd = () => {
-    if (participants.includes("Samuel")) {
+    if (participants.includes(participantName)) {
       return Alert.alert(
         "Participanete existe!",
         "Já existe um participant na lista com esse nome"
       );
     }
+
+    setParticipants((prevState) => [...prevState, participantName]);
+
+    setParticipantName("");
   };
 
   const handleParticipantRemove = (name: string) => {
@@ -52,6 +46,9 @@ export function Home() {
           placeholderTextColor="#6b6b6b"
           style={styles.input}
           keyboardType="default" //https://reactnative.dev/docs/textinput#keyboardtype
+          //Callback that is called when the text input's text changes. Changed text is passed as a single string argument to the callback handler.
+          onChangeText={setParticipantName} //para o onChangeText eu posso simplesmente passar o nome dafunção que faz atualiza o meu estado.
+          value={participantName}
         />
 
         {/* https://reactnative.dev/docs/touchableopacity */}
