@@ -18,7 +18,7 @@ export function Home() {
     if (participants.includes(participantName)) {
       return Alert.alert(
         "Participanete existe!",
-        "Já existe um participant na lista com esse nome"
+        "Já existe um participante na lista com esse nome"
       );
     }
 
