@@ -30,7 +30,13 @@ export function Home() {
   const handleParticipantRemove = (name: string) => {
     // https://reactnative.dev/docs/alert
     Alert.alert("Remover", `Deseja remover o participante ${name}?`, [
-      { text: "Sim", onPress: () => Alert.alert("Deletado") },
+      {
+        text: "Sim",
+        onPress: () =>
+          setParticipants((prevState) =>
+            prevState.filter((element) => element !== name)
+          ),
+      },
       { text: "Não", style: "cancel" },
     ]);
   };
@@ -47,7 +53,7 @@ export function Home() {
           style={styles.input}
           keyboardType="default" //https://reactnative.dev/docs/textinput#keyboardtype
           //Callback that is called when the text input's text changes. Changed text is passed as a single string argument to the callback handler.
-          onChangeText={setParticipantName} //para o onChangeText eu posso simplesmente passar o nome dafunção que faz atualiza o meu estado.
+          onChangeText={setParticipantName} //para o onChangeText eu posso simplesmente passar o nome da função que faz a atualização do meu estado.
           value={participantName}
         />
 
